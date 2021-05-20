@@ -10,8 +10,4 @@ import retrofit2.http.POST;
 public interface UserService {
     @POST("rest/users/login")
     Call<UserAuthenticated> authenticateUser(@Body UserCredentials user);
-
-    //barraca
-
-    // o david e fixe.
 }

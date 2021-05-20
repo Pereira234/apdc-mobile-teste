@@ -12,4 +12,6 @@ public interface UserService {
     Call<UserAuthenticated> authenticateUser(@Body UserCredentials user);
 
     //barraca
+
+    // o david e fixe.
 }

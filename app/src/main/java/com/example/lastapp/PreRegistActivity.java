@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.lastapp.ui.login.LoginActivity;
+import com.example.lastapp.ui.register.OrgsRegisterActivity;
 import com.example.lastapp.ui.register.RegisterActivity;
 
 public class PreRegistActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class PreRegistActivity extends AppCompatActivity {
     }
 
     public void openOrganizationRegisterActivity(View view) {
-        Intent intent = new Intent(this, PreRegistActivity.class);
+        Intent intent = new Intent(this, OrgsRegisterActivity.class);
         startActivity(intent);
     }
 }

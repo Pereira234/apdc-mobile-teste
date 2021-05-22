@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LastApp">
-        <activity android:name=".ui.register.RegisterActivity"></activity>
+        <activity android:name=".ui.register.OrgsRegisterActivity"></activity>
+        <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".PreRegistActivity" />
         <activity android:name=".EntryActivity">
             <intent-filter>

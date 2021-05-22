@@ -1,6 +1,7 @@
 package com.example.lastapp.data;
 
 import com.example.lastapp.data.model.LoggedInUser;
+import com.example.lastapp.data.model.RegisterData;
 import com.example.lastapp.data.model.UserAuthenticated;
 import com.example.lastapp.data.model.UserCredentials;
 
@@ -29,22 +30,18 @@ public class RegisterDataSource {
 
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<Integer> register(String username, String password, String confirmation, String name, String email) {
 
-        Call<UserAuthenticated> userAuthenticatedCall = service.authenticateUser(new UserCredentials(username, password));
+        Call<Integer> userRegisterCall = service.registerUser(new RegisterData(username, password, confirmation, name, email));
         try {
-           Response<UserAuthenticated> response = userAuthenticatedCall.execute();
+           Response<Integer> response = userRegisterCall.execute();
            if (response.isSuccessful()){
-               UserAuthenticated ua = response.body();
-               return new Result.Success<>(new LoggedInUser(ua.getTokenID() ,ua.getUsername()));
+               return new Result.Success<>(response.code());
            }
             return new Result.Error(new Exception(response.errorBody().toString()));
         } catch (IOException e) {
-            return new Result.Error(new IOException("Error logging in", e));
+            return new Result.Error(new IOException("Error registering!", e));
         }
     }
 
-    public void logout() {
-        // TODO: revoke authentication
-    }
 }

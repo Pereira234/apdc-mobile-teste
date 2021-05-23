@@ -1,11 +1,11 @@
-package com.example.lastapp.ui.login;
+package com.example.lastapp.ui.register;
 
 import androidx.annotation.Nullable;
 
 /**
- * Data validation state of the login form.
+ * Data validation state of the registration form.
  */
-class RegistFormState {
+class RegisterFormState {
     @Nullable
     private Integer usernameError;
     @Nullable
@@ -14,14 +14,14 @@ class RegistFormState {
     private Integer passwordError;
     private boolean isDataValid;
 
-    RegistFormState(@Nullable Integer usernameError, @Nullable Integer emailError, @Nullable Integer passwordError) {
+    RegisterFormState(@Nullable Integer usernameError, @Nullable Integer emailError, @Nullable Integer passwordError) {
         this.usernameError = usernameError;
         this.emailError = emailError;
         this.passwordError = passwordError;
         this.isDataValid = false;
     }
 
-    RegistFormState(boolean isDataValid) {
+    RegisterFormState(boolean isDataValid) {
         this.usernameError = null;
         this.emailError = null;
         this.passwordError = null;

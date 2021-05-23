@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.lastapp.LoginApp;
 import com.example.lastapp.MapsActivity;
 import com.example.lastapp.R;
+import com.example.lastapp.ui.login.LoginActivity;
 import com.example.lastapp.ui.register.RegisteredUserView;
 import com.example.lastapp.ui.register.RegisterFormState;
 import com.example.lastapp.ui.register.RegisterResult;
@@ -47,12 +48,13 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory(((LoginApp) getApplication()).getExecutorService()))
                 .get(RegisterViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username); //not working, wrong id's
-        final EditText passwordEditText = findViewById(R.id.password); //not working, wrong id's
-        //some id's missing
-
-        final Button button = findViewById(R.id.button);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        final EditText usernameEditText = findViewById(R.id.usernameRegister);
+        final EditText passwordEditText = findViewById(R.id.passwordRegister);
+        final EditText nameEditText = findViewById(R.id.nameRegister);
+        final EditText emailEditText = findViewById(R.id.emailRegister);
+        final EditText confirmPassEditText = findViewById(R.id.passwordConfirmRegister);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        final Button button = findViewById(R.id.register_btn);
 
         registerViewModel.getLoginFormState().observe(this, new Observer<RegisterFormState>() { //need to update!
             @Override
@@ -65,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                     usernameEditText.setError(getString(registerFormState.getUsernameError()));
                 }
                 if (registerFormState.getEmailError() != null) {
-                    passwordEditText.setError(getString(registerFormState.getEmailError()));
+                    emailEditText.setError(getString(registerFormState.getEmailError()));
                 }
                 if (registerFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(registerFormState.getPasswordError()));
@@ -73,20 +75,20 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        registerViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {  //need to update!
+        registerViewModel.getLoginResult().observe(this, new Observer<RegisterResult>() {  //need to update!
             @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
+            public void onChanged(@Nullable RegisterResult registerResult) {
+                if (registerResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                progressBar.setVisibility(View.GONE);
+                if (registerResult.getError() != null) {
+                    showRegisterFailed(registerResult.getError());
                 }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                if (registerResult.getSuccess() != null) {
+                   // updateUiWithUser(RegisterResult.getSuccess()); MOSTRAR O TOAST DE SUCESSO
                     setResult(Activity.RESULT_OK);
-                    Intent intent = new Intent(mActivity, MapsActivity.class);
+                    Intent intent = new Intent(mActivity, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -110,7 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
+                registerViewModel.registerDataChanged(usernameEditText.getText().toString(),
+                        emailEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         };
@@ -121,30 +124,41 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                    registerViewModel.register(usernameEditText.getText().toString(),
+                            passwordEditText.getText().toString(),
+                            confirmPassEditText.getText().toString(),
+                            nameEditText.getText().toString(),
+                            emailEditText.getText().toString()
+
+
+                    );
                 }
                 return false;
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                progressBar.setVisibility(View.VISIBLE);
+                registerViewModel.register(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(),
+                        confirmPassEditText.getText().toString(),
+                        nameEditText.getText().toString(),
+                        emailEditText.getText().toString()
+
+
+                );
             }
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+    private void showRegisterFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showRegisterSuccess(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

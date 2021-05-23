@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/emailRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextOrgName" />
 
     <EditText
-        android:id="@+id/editTextTextUsername"
+        android:id="@+id/usernameRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -58,10 +58,10 @@
         android:hint="Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordRegister"
         android:hint="Palavra Passe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,10 +72,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameRegister" />
 
     <EditText
-        android:id="@+id/editTextTextPasswordConfirm"
+        android:id="@+id/passwordConfirmRegister"
         android:hint="Confirmar Palavra Passe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegister" />
 
     <Button
         android:id="@+id/button"
@@ -96,7 +96,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmRegister"
         app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

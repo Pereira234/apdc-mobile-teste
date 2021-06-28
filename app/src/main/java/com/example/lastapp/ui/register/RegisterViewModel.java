@@ -8,11 +8,9 @@ import android.util.Patterns;
 
 import com.example.lastapp.data.RegisterRepository;
 import com.example.lastapp.data.Result;             //update?
-import com.example.lastapp.data.model.RegisterData; //former LoggedInUser
+import com.example.lastapp.data.model.RegisterRequest; //former LoggedInUser
 import com.example.lastapp.R;
-import com.example.lastapp.ui.register.RegisteredUserView;
-import com.example.lastapp.ui.register.RegisterFormState;
-import com.example.lastapp.ui.register.RegisterResult;
+import com.example.lastapp.data.model.RegisterResponse;
 
 import java.util.concurrent.Executor;
 
@@ -29,11 +27,12 @@ public class RegisterViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    LiveData<RegisterFormState> getLoginFormState() {
+    LiveData<RegisterFormState> getRegisterFormState() {
         return registerFormState;
-    } //need to update!
+    }
 
-    LiveData<RegisterResult> getLoginResult() { //need to update!
+    //need to update!
+    LiveData<RegisterResult> getRegisterResult() { //need to update!
         return registerResult;
     }
 
@@ -41,10 +40,9 @@ public class RegisterViewModel extends ViewModel {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Result<Integer> result = registerRepository.register(username, password, confirmation, name, email); //Not sure about Result type
+                Result<Void> result = registerRepository.register(username, password, confirmation, name, email);
                 if (result instanceof Result.Success) {
-                    RegisterData data = ((Result.Success<RegisterData>) result).getData();
-                    registerResult.postValue(new RegisterResult(new RegisteredUserView(data.getUsername())));
+                    registerResult.postValue(new RegisterResult(R.string.register_successful));
                 } else {
                     registerResult.postValue(new RegisterResult(R.string.register_failed));
                 }
@@ -52,17 +50,17 @@ public class RegisterViewModel extends ViewModel {
         });
     }
 
-    public void register_old(String username, String password, String confirmation, String name, String email) {
-        // can be launched in a separate asynchronous job
-        Result<Integer> result = registerRepository.register(username, password, confirmation, name, email); //Not sure about Result type
-
-        if (result instanceof Result.Success) {
-            RegisterData data = ((Result.Success<RegisterData>) result).getData();
-            registerResult.setValue(new RegisterResult(new RegisteredUserView(data.getUsername())));
-        } else {
-            registerResult.setValue(new RegisterResult(R.string.register_failed));
-        }
-    }
+//    public void register_old(String username, String password, String confirmation, String name, String email) {
+//        // can be launched in a separate asynchronous job
+//        Result<Void> result = registerRepository.register(username, password, confirmation, name, email);
+//
+//        if (result instanceof Result.Success) {
+//            RegisterRequest data = ((Result.Success<RegisterRequest>) result).getData();
+//            registerResult.postValue(new RegisterResult(R.string.register_successful));
+//        } else {
+//            registerResult.setValue(new RegisterResult(R.string.register_failed));
+//        }
+//    }
 
     public void registerDataChanged(String username, String email, String password) {
         if (!isUserNameValid(username)) {

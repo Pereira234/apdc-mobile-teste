@@ -1,10 +1,10 @@
 package com.example.lastapp.data.model;
 
-public class UserCredentials {
+public class LoginRequest {
     String username;
     String password;
 
-    public UserCredentials(String username, String password) {
+    public LoginRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }

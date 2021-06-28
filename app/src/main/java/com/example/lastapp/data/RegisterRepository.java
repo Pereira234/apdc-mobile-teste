@@ -1,6 +1,7 @@
 package com.example.lastapp.data;
 
-import com.example.lastapp.data.model.LoggedInUser;
+import com.example.lastapp.data.model.RegisterRequest;
+import com.example.lastapp.data.model.RegisterResponse;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -29,10 +30,9 @@ public class RegisterRepository {
 
 
 // nao sei se faz sentido
-
-    public Result<Integer> register(String username, String password, String confirmation, String name, String email) {
+    public Result<Void> register(String username, String password, String confirmation, String name, String email) {
         // handle register
-        Result<Integer> result = dataSource.register(username, password, confirmation, name, email);
+        Result<Void> result = dataSource.register(username, password, confirmation, name, email);
         return result;
     }
 }

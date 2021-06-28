@@ -1,13 +1,13 @@
 package com.example.lastapp.data.model;
 
-public class RegisterData {
+public class RegisterRequest {
     String username;
     String password;
     String confirmation;
     String name;
     String email;
 
-    public RegisterData(String username, String password, String confirmation, String name, String email) {
+    public RegisterRequest(String username, String password, String confirmation, String name, String email) {
         this.username = username;
         this.password = password;
         this.confirmation = confirmation;

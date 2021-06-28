@@ -1,9 +1,7 @@
 package com.example.lastapp.data;
 
-import com.example.lastapp.data.model.LoggedInUser;
-import com.example.lastapp.data.model.RegisterData;
-import com.example.lastapp.data.model.UserAuthenticated;
-import com.example.lastapp.data.model.UserCredentials;
+import com.example.lastapp.data.model.RegisterRequest;
+import com.example.lastapp.data.model.RegisterResponse;
 
 import java.io.IOException;
 
@@ -30,13 +28,14 @@ public class RegisterDataSource {
 
     }
 
-    public Result<Integer> register(String username, String password, String confirmation, String name, String email) {
+            //tipo de retorno pode estar errado
+    public Result<Void> register(String username, String password, String confirmation, String name, String email) {
 
-        Call<Integer> userRegisterCall = service.registerUser(new RegisterData(username, password, confirmation, name, email));
+        Call<Void> userRegisterCall = service.registerUser(new RegisterRequest(username, password, confirmation, name, email));
         try {
-           Response<Integer> response = userRegisterCall.execute();
+           Response<Void> response = userRegisterCall.execute();
            if (response.isSuccessful()){
-               return new Result.Success<>(response.code());
+               return new Result.Success<>(response.body());
            }
             return new Result.Error(new Exception(response.errorBody().toString()));
         } catch (IOException e) {

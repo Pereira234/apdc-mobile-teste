@@ -1,7 +1,7 @@
 package com.example.lastapp.data.model;
 
 // Class feita automaticamente pelo Retrofit e e o resultante do servico login REST
-public class UserAuthenticated {
+public class LoginResponse {
 
     String userId;
     String tokenId;

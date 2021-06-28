@@ -24,14 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lastapp.LoginApp;
-import com.example.lastapp.MapsActivity;
 import com.example.lastapp.R;
 import com.example.lastapp.ui.login.LoginActivity;
-import com.example.lastapp.ui.register.RegisteredUserView;
-import com.example.lastapp.ui.register.RegisterFormState;
-import com.example.lastapp.ui.register.RegisterResult;
-import com.example.lastapp.ui.register.RegisterViewModel;
-import com.example.lastapp.ui.register.RegisterViewModelFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -56,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         final Button button = findViewById(R.id.register_btn);
 
-        registerViewModel.getLoginFormState().observe(this, new Observer<RegisterFormState>() { //need to update!
+        registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() { //need to update! (updated)
             @Override
             public void onChanged(@Nullable RegisterFormState registerFormState) {
                 if (registerFormState == null) {
@@ -75,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        registerViewModel.getLoginResult().observe(this, new Observer<RegisterResult>() {  //need to update!
+        registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {  //need to update!
             @Override
             public void onChanged(@Nullable RegisterResult registerResult) {
                 if (registerResult == null) {

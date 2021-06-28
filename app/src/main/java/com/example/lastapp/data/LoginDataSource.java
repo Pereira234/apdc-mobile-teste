@@ -1,8 +1,8 @@
 package com.example.lastapp.data;
 
 import com.example.lastapp.data.model.LoggedInUser;
-import com.example.lastapp.data.model.UserAuthenticated;
-import com.example.lastapp.data.model.UserCredentials;
+import com.example.lastapp.data.model.LoginResponse;
+import com.example.lastapp.data.model.LoginRequest;
 
 import java.io.IOException;
 
@@ -31,11 +31,11 @@ public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
 
-        Call<UserAuthenticated> userAuthenticatedCall = service.authenticateUser(new UserCredentials(username, password));
+        Call<LoginResponse> userAuthenticatedCall = service.authenticateUser(new LoginRequest(username, password));
         try {
-           Response<UserAuthenticated> response = userAuthenticatedCall.execute();
+           Response<LoginResponse> response = userAuthenticatedCall.execute();
            if (response.isSuccessful()){
-               UserAuthenticated ua = response.body();
+               LoginResponse ua = response.body();
                return new Result.Success<>(new LoggedInUser(ua.getTokenID() ,ua.getUsername()));
            }
             return new Result.Error(new Exception(response.errorBody().toString()));

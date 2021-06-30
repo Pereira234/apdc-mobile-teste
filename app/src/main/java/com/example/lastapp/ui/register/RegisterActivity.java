@@ -66,6 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if (registerFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(registerFormState.getPasswordError()));
                 }
+                if (registerFormState.getNameError() != null) {
+                    nameEditText.setError(getString(registerFormState.getNameError()));
+                }
             }
         });
 
@@ -109,11 +112,14 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 registerViewModel.registerDataChanged(usernameEditText.getText().toString(),
                         emailEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString(),
+                        nameEditText.getText().toString());
             }
         };
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
+        emailEditText.addTextChangedListener(afterTextChangedListener);
+        nameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override

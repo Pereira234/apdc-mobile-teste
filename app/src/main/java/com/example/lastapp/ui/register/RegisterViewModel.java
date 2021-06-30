@@ -62,13 +62,16 @@ public class RegisterViewModel extends ViewModel {
 //        }
 //    }
 
-    public void registerDataChanged(String username, String email, String password) {
+    public void registerDataChanged(String username, String email, String password, String name) {
         if (!isUserNameValid(username)) {
-            registerFormState.setValue(new RegisterFormState(R.string.invalid_username, null, null));
+            registerFormState.setValue(new RegisterFormState(R.string.invalid_username, null, null, null));
         } else if (!isEmailValid(email)) {
-            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_email, null));
+            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_email, null, null));
         }else if(!isPasswordValid(password)){
-            registerFormState.setValue(new RegisterFormState(null, null, R.string.invalid_password));
+            registerFormState.setValue(new RegisterFormState(null, null, R.string.invalid_password, null));
+        }
+        else if(!isNameValid(name)){
+            registerFormState.setValue(new RegisterFormState(null, null, null, R.string.invalid_name));
         } else {
             registerFormState.setValue(new RegisterFormState(true));
         }
@@ -98,5 +101,10 @@ public class RegisterViewModel extends ViewModel {
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    // A placeholder password validation check
+    private boolean isNameValid(String name) {
+        return name != null;
     }
 }

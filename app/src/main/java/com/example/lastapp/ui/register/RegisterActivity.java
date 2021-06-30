@@ -81,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if (registerResult.getSuccess() != null) {
                    // updateUiWithUser(RegisterResult.getSuccess()); MOSTRAR O TOAST DE SUCESSO
+                    showRegisterSuccess();
                     setResult(Activity.RESULT_OK);
                     Intent intent = new Intent(mActivity, LoginActivity.class);
                     startActivity(intent);
@@ -152,7 +153,9 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    private void showRegisterSuccess(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void showRegisterSuccess() {
+        String message = getString(R.string.register_successful);
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
     }
 }

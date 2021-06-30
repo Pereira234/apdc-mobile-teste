@@ -9,7 +9,7 @@ import com.example.lastapp.ui.register.RegisteredUserView;
  */
 class RegisterResult {
     @Nullable
-    private RegisteredUserView success;
+    private Boolean success;
     @Nullable
     private Integer error;
 
@@ -17,12 +17,12 @@ class RegisterResult {
         this.error = error;
     }
 
-    RegisterResult(@Nullable RegisteredUserView success) {
+    RegisterResult(boolean success) {
         this.success = success;
     }
 
     @Nullable
-    RegisteredUserView getSuccess() {
+    Boolean getSuccess() {
         return success;
     }
 

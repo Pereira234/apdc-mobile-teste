@@ -42,7 +42,7 @@ public class RegisterViewModel extends ViewModel {
             public void run() {
                 Result<Void> result = registerRepository.register(username, password, confirmation, name, email);
                 if (result instanceof Result.Success) {
-                    registerResult.postValue(new RegisterResult(R.string.register_successful));
+                    registerResult.postValue(new RegisterResult(true));
                 } else {
                     registerResult.postValue(new RegisterResult(R.string.register_failed));
                 }

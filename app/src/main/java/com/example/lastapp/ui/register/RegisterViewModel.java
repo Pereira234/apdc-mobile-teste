@@ -91,11 +91,9 @@ public class RegisterViewModel extends ViewModel {
         if (email == null) {
             return false;
         }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
+
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
     }
 
     // A placeholder password validation check

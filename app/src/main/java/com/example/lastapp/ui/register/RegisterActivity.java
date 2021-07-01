@@ -23,7 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lastapp.LoginApp;
+import com.example.lastapp.GWApp;
 import com.example.lastapp.R;
 import com.example.lastapp.ui.login.LoginActivity;
 
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mActivity = this;
 
-        registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory(((LoginApp) getApplication()).getExecutorService()))
+        registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory(((GWApp) getApplication()).getExecutorService()))
                 .get(RegisterViewModel.class);
 
         final EditText usernameEditText = findViewById(R.id.usernameRegister);

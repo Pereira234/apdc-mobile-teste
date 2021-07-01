@@ -23,11 +23,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lastapp.LoginApp;
-import com.example.lastapp.MapsActivity;
+import com.example.lastapp.GWApp;
+import com.example.lastapp.MainActivity;
 import com.example.lastapp.R;
-import com.example.lastapp.ui.login.LoginViewModel;
-import com.example.lastapp.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mActivity = this;
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory(((LoginApp) getApplication()).getExecutorService()))
+        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory(((GWApp) getApplication()).getExecutorService()))
                 .get(LoginViewModel.class);
 
         final EditText usernameEditText = findViewById(R.id.username);
@@ -78,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
-                    Intent intent = new Intent(mActivity, MapsActivity.class);
+                    Intent intent = new Intent(mActivity, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

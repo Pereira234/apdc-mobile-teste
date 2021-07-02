@@ -28,5 +28,5 @@
         android:id="@+id/fifthFragment"
         android:name="com.example.lastapp.FifthFragment"
         android:label="fragment_fifth"
-        tools:layout="@layout/fragment_fifth" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

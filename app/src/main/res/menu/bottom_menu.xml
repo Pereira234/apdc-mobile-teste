@@ -15,7 +15,7 @@
         android:title="Maps" />
     <item
         android:id="@+id/forthFragment"
-        android:icon="@drawable/settings_icon_24"
+        android:icon="@drawable/event_icon_24"
         android:title="Settings" />
     <item
         android:id="@+id/fifthFragment"

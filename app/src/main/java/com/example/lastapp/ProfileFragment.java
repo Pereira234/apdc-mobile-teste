@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
  */
 public class ProfileFragment extends Fragment {
 
-    //ImageView imgView;
+    ImageView imgView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +68,11 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        imgView = v.findViewById(R.id.profilePicView);
+        Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
+
+        return v;
     }
 }

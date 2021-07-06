@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -32,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private LoginActivity mActivity;
 
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF = "mypref";
+    private static final String USERNAME_KEY = "username";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -76,6 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
+
+                    //save preferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(USERNAME_KEY, usernameEditText.getText().toString());
+                    editor.apply();
+
                     Intent intent = new Intent(mActivity, MainActivity.class);
                     startActivity(intent);
                     finish();

@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_forth" />
     <fragment
         android:id="@+id/fifthFragment"
-        android:name="com.example.lastapp.FifthFragment"
+        android:name="com.example.lastapp.ProfileFragment"
         android:label="fragment_fifth"
         tools:layout="@layout/fragment_profile" />
 </navigation>

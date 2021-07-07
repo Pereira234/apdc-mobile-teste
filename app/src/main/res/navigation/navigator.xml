@@ -6,9 +6,9 @@
     app:startDestination="@id/firstFragment">
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.lastapp.ForthFragment"
+        android:name="com.example.lastapp.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_forth" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.lastapp.SecondFragment"
@@ -23,7 +23,7 @@
         android:id="@+id/forthFragment"
         android:name="com.example.lastapp.ForthFragment"
         android:label="fragment_forth"
-        tools:layout="@layout/fragment_forth" />
+        tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/fifthFragment"
         android:name="com.example.lastapp.ProfileFragment"

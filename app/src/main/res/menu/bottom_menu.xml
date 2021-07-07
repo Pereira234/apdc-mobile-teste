@@ -16,7 +16,7 @@
     <item
         android:id="@+id/forthFragment"
         android:icon="@drawable/event_icon_24"
-        android:title="Settings" />
+        android:title="Events" />
     <item
         android:id="@+id/fifthFragment"
         android:icon="@drawable/profile_icon_24"

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.lastapp.GWApp;
 import com.example.lastapp.MainActivity;
 import com.example.lastapp.R;
+import com.example.lastapp.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,6 +43,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        String username = sharedPreferences.getString(USERNAME_KEY, null);
+
+        if (username != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
         mActivity = this;
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory(((GWApp) getApplication()).getExecutorService()))
@@ -51,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        final TextView registerTextView = findViewById(R.id.clickToRegist);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
 
@@ -140,6 +152,18 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUserRegisterActivity(v);
+            }
+        });
+    }
+
+    public void openUserRegisterActivity(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

@@ -28,8 +28,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="60dp"
         android:ems="10"
+        android:hint="Name you event!"
         android:inputType="textPersonName"
-        android:text="Name your event!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventTitle" />
 
@@ -40,8 +40,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:hint="Lat"
         android:inputType="textPersonName"
-        android:text="Latitude"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
@@ -52,8 +52,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:hint="Long"
         android:inputType="textPersonName"
-        android:text="Longitude"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationLat" />
 

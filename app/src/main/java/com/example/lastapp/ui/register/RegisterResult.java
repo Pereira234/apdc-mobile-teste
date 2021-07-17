@@ -2,7 +2,6 @@ package com.example.lastapp.ui.register;
 
 import androidx.annotation.Nullable;
 
-import com.example.lastapp.ui.register.RegisteredUserView;
 
 /**
  * Registration result : success (user details) or error message.

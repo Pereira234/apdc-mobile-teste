@@ -7,31 +7,31 @@ import com.example.lastapp.data.model.RegisterResponse;
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
-public class RegisterRepository {
+public class NewEventRepository {
 
-    private static volatile RegisterRepository instance;
+    private static volatile NewEventRepository instance;
 
-    private RegisterDataSource dataSource;
+    private NewEventDataSource dataSource;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
 
     // private constructor : singleton access
-    private RegisterRepository(RegisterDataSource dataSource) {
+    private NewEventRepository(NewEventDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    public static RegisterRepository getInstance(RegisterDataSource dataSource) {
+    public static NewEventRepository getInstance(NewEventDataSource dataSource) {
         if (instance == null) {
-            instance = new RegisterRepository(dataSource);
+            instance = new NewEventRepository(dataSource);
         }
         return instance;
     }
 
 
-    public Result<Void> register(String username, String password, String confirmation, String name, String email) {
+    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude) {
         // handle register
-        Result<Void> result = dataSource.register(username, password, confirmation, name, email);
+        Result<Void> result = dataSource.createEvent(name, description, duration, date, latitude, longitude);
         return result;
     }
 }

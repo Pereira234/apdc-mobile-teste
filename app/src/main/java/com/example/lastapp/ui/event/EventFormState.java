@@ -7,59 +7,59 @@ import androidx.annotation.Nullable;
  */
 class EventFormState {
     @Nullable
-    private String name;
+    private Integer nameError;
     @Nullable
-    private String description;
+    private Integer descriptionError;
     @Nullable
-    private String duration;
+    private Integer durationError;
     @Nullable
-    private String date;
+    private Integer dateError;
     @Nullable
-    private Double latitude;
+    private Integer latitudeError;
     @Nullable
-    private Double longitude;
+    private Integer longitudeError;
     private boolean isDataValid;
 
-    EventFormState(@Nullable String name, @Nullable String description, @Nullable String duration,
-                   @Nullable String date, @Nullable Double latitude, @Nullable Double longitude) {
-        this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.date = date;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    EventFormState(@Nullable Integer nameError, @Nullable Integer descriptionError, @Nullable Integer durationError,
+                   @Nullable Integer dateError, @Nullable Integer latitudeError, @Nullable Integer longitudeError) {
+        this.nameError = nameError;
+        this.descriptionError = descriptionError;
+        this.durationError = durationError;
+        this.dateError = dateError;
+        this.latitudeError = latitudeError;
+        this.longitudeError = longitudeError;
         this.isDataValid = false;
     }
 
     EventFormState(boolean isDataValid) {
-        this.name = null;
-        this.description = null;
-        this.duration = null;
-        this.date = null;
-        this.latitude = null;
-        this.longitude = null;
+        this.nameError = null;
+        this.descriptionError = null;
+        this.durationError = null;
+        this.dateError = null;
+        this.latitudeError = null;
+        this.longitudeError = null;
         this.isDataValid = isDataValid;
     }
 
     @Nullable
-    String getName() { return name; }
+    Integer getName() { return nameError; }
 
     @Nullable
-    String getDescription() {
-        return description;
+    Integer getDescription() {
+        return descriptionError;
     }
 
     @Nullable
-    String getDuration() { return duration; }
+    Integer getDuration() { return durationError; }
 
     @Nullable
-    String getDate() { return date; }
+    Integer getDate() { return dateError; }
 
     @Nullable
-    Double getLatitude() { return latitude; }
+    Integer getLatitude() { return latitudeError; }
 
     @Nullable
-    Double getLongitude() { return longitude; }
+    Integer getLongitude() { return longitudeError; }
 
     boolean isDataValid() {
         return isDataValid;

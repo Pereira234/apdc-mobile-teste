@@ -1,2 +1,4 @@
-package com.example.lastapp.ui.event;public class EventResult {
+package com.example.lastapp.ui.event;
+
+public class EventResult {
 }

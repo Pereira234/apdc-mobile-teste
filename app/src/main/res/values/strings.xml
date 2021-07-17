@@ -13,7 +13,7 @@
     <string name="invalid_name">Not a valid name</string>
     <string name="login_failed">"Login failed"</string>
 
-    <string name="new_account">Click here for register</string>
+    <string name="new_account">Click here to register</string>
 
     <string name="register_failed">"Registration failed"</string>
     <string name="register_successful">"Success! "</string>

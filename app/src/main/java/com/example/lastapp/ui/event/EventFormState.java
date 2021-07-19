@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 /**
  * Data validation state of the login form.
  */
-class EventFormState {
+public class EventFormState {
     @Nullable
     private Integer nameError;
     @Nullable
@@ -42,26 +42,26 @@ class EventFormState {
     }
 
     @Nullable
-    Integer getName() { return nameError; }
+    public Integer getNameError() { return nameError; }
 
     @Nullable
-    Integer getDescription() {
+    public Integer getDescriptionError() {
         return descriptionError;
     }
 
     @Nullable
-    Integer getDuration() { return durationError; }
+    public Integer getDurationError() { return durationError; }
 
     @Nullable
-    Integer getDate() { return dateError; }
+    public Integer getDateError() { return dateError; }
 
     @Nullable
-    Integer getLatitude() { return latitudeError; }
+    public Integer getLatitudeError() { return latitudeError; }
 
     @Nullable
-    Integer getLongitude() { return longitudeError; }
+    public Integer getLongitudeError() { return longitudeError; }
 
-    boolean isDataValid() {
+    public boolean isDataValid() {
         return isDataValid;
     }
 }

@@ -27,12 +27,12 @@ public class EventViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    LiveData<EventFormState> getEventFormState() {
+    public LiveData<EventFormState> getEventFormState() {
         return eventFormState;
     }
 
     //need to update!
-    LiveData<EventResult> getEventResult() { //need to update!
+    public LiveData<EventResult> getEventResult() { //need to update!
         return eventResult;
     }
 

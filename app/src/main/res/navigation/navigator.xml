@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/forthFragment"
-        android:name="com.example.lastapp.ForthFragment"
+        android:name="com.example.lastapp.EventsFragment"
         android:label="fragment_forth"
         tools:layout="@layout/fragment_events" />
     <fragment

@@ -3,7 +3,7 @@ package com.example.lastapp.ui.event;
 import androidx.annotation.Nullable;
 
 
-class EventResult {
+public class EventResult {
     @Nullable
     private Boolean success;
     @Nullable
@@ -18,12 +18,12 @@ class EventResult {
     }
 
     @Nullable
-    Boolean getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
     @Nullable
-    Integer getError() {
+    public Integer getError() {
         return error;
     }
 }

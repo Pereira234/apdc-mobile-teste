@@ -1,6 +1,7 @@
 package com.example.lastapp.data;
 
 import com.example.lastapp.data.model.GetUserResponse;
+import com.example.lastapp.data.model.NewEventRequest;
 import com.example.lastapp.data.model.RegisterRequest;
 import com.example.lastapp.data.model.LoginResponse;
 import com.example.lastapp.data.model.LoginRequest;
@@ -20,4 +21,7 @@ public interface UserService {
 
     @GET("rest/users/{user_id}")
     Call<GetUserResponse> getUser(@Path("user_id") String user_id);
+
+    @POST("rest/users/create-event")
+    Call<Void> newEvent(@Body NewEventRequest data);
 }

@@ -18,7 +18,7 @@ public class RegisterViewModel extends ViewModel {
 
     private MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
     private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();
-    private RegisterRepository registerRepository; //is it necessary?
+    private RegisterRepository registerRepository;
 
     private final Executor executor;
 

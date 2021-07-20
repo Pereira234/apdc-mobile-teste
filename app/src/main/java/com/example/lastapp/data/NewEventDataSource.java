@@ -1,7 +1,7 @@
 package com.example.lastapp.data;
 
-import com.example.lastapp.data.model.RegisterRequest;
-import com.example.lastapp.data.model.RegisterResponse;
+import com.example.lastapp.data.model.NewEventRequest;
+import com.example.lastapp.data.model.NewEventResponse;
 
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-public class RegisterDataSource {
+public class NewEventDataSource {
 
     private UserService service;
 
-    public RegisterDataSource() {
+    public NewEventDataSource() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://goodway-320318.appspot.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -26,17 +26,17 @@ public class RegisterDataSource {
         this.service = retrofit.create(UserService.class);
     }
 
-    public Result<Void> register(String username, String password, String confirmation, String name, String email) {
+    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude) {
 
-        Call<Void> userRegisterCall = service.registerUser(new RegisterRequest(username, password, confirmation, name, email));
+        Call<Void> newEventCall = service.newEvent(new NewEventRequest(name, description, duration, date, latitude, longitude));
         try {
-           Response<Void> response = userRegisterCall.execute();
-           if (response.isSuccessful()){
-               return new Result.Success<>(response.body());
-           }
+            Response<Void> response = newEventCall.execute();
+            if (response.isSuccessful()){
+                return new Result.Success<>(response.body());
+            }
             return new Result.Error(new Exception(response.errorBody().toString()));
         } catch (IOException e) {
-            return new Result.Error(new IOException("Error registering!", e));
+            return new Result.Error(new IOException("Error creating new event!", e));
         }
     }
 

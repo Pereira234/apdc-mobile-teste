@@ -23,20 +23,20 @@ public class GetUserViewModel extends ViewModel {
 //        user = null;
     }
 
-    public void getUser(String username) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                Result<GetUserResponse> result = getUserRepository.getUser(username);
-                if (result instanceof Result.Success) {
-                    user = ((Result.Success<GetUserResponse>) result).getData();
-                }
-                else {
-                    user = null;
-                }
-            }
-        });
-    }
+//    public void getUser(String username) {
+//        executor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                Result<GetUserResponse> result = getUserRepository.getUser(username);
+//                if (result instanceof Result.Success) {
+//                    user = ((Result.Success<GetUserResponse>) result).getData();
+//                }
+//                else {
+//                    user = null;
+//                }
+//            }
+//        });
+//    }
 
     public GetUserResponse returnUser() {
         return user;

@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment {
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
+    private static final String TOKEN_ID_KEY = "tokenid";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,31 +106,15 @@ public class ProfileFragment extends Fragment {
 
 
         final TextView profileName = v.findViewById(R.id.profileName);
+        final TextView profileDescription = v.findViewById(R.id.profileDescription);
+        final TextView email = v.findViewById(R.id.email_textview);
+        final TextView phone = v.findViewById(R.id.phone_textview);
+        final TextView local = v.findViewById(R.id.local_textview);
+
+
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         String username = sharedPreferences.getString(USERNAME_KEY, null);
-
-//        Result<GetUserResponse> userResponseResult = getUserDataSource.getUser(username);
-//        if (userResponseResult instanceof Result.Success) {
-//            GetUserResponse user = ((Result.Success<GetUserResponse>) userResponseResult).getData();
-//            profileName.setText(user.getName());
-//        }
-
-
-
-
-//        ExecutorService executorService = Executors.newFixedThreadPool(4);
-//        userViewModel = new ViewModelProvider(this.getActivity(), new GetUserViewModelFactory(executorService))
-//                .get(GetUserViewModel.class);
-//
-//        userViewModel.getUser(username);
-//        GetUserResponse user = userViewModel.returnUser();
-//
-//        if (user != null) {
-//            profileName.setText(user.getName());
-//        }
-//        else {
-//            profileName.setText("Error");
-//        }
+        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, null);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://goodway-320318.appspot.com/")
@@ -138,23 +123,31 @@ public class ProfileFragment extends Fragment {
 
         UserService service = retrofit.create(UserService.class);
 
-        Call<GetUserResponse> getUserResponseCall = service.getUser(username);
+        Call<GetUserResponse> getUserResponseCall = service.getUser(username, tokenId);
 
         getUserResponseCall.enqueue(new Callback<GetUserResponse>() {
             @Override
             public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                 if (!response.isSuccessful()) {
-                    profileName.setText("Code " + response.code());
+                    profileName.setText("Erro servidor" + response.code());
+                    profileDescription.setText("");
+                    email.setText("");
+                    phone.setText("");
+                    local.setText("");
                 }
                 else {
                     GetUserResponse user = response.body();
                     profileName.setText(user.getName());
+                    profileDescription.setText("Descrição de teste");
+                    email.setText(user.getEmail());
+                    phone.setText(user.getCellphone());
+                    local.setText(user.getPrimaryAddress());
                 }
             }
 
             @Override
             public void onFailure(Call<GetUserResponse> call, Throwable t) {
-                profileName.setText("Error " + t.getMessage());
+                profileName.setText(t.getMessage());
             }
         });
 

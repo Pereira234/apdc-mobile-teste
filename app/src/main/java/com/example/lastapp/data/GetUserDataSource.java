@@ -30,9 +30,9 @@ public class GetUserDataSource {
 
     }
 
-    public Result<GetUserResponse> getUser(String username) {
+    public Result<GetUserResponse> getUser(String username, String tokenId) {
 
-        Call<GetUserResponse> getUserResponseCall = service.getUser(username);
+        Call<GetUserResponse> getUserResponseCall = service.getUser(username, tokenId);
         try {
            Response<GetUserResponse> response = getUserResponseCall.execute();
            if (response.isSuccessful()){

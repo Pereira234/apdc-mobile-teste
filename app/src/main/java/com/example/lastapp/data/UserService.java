@@ -9,6 +9,7 @@ import com.example.lastapp.data.model.LoginRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -20,7 +21,7 @@ public interface UserService {
     Call<Void> registerUser(@Body RegisterRequest data);
 
     @GET("rest/users/{user_id}")
-    Call<GetUserResponse> getUser(@Path("user_id") String user_id);
+    Call<GetUserResponse> getUser(@Path("user_id") String user_id, @Header("tokenId") String tokenId);
 
     @POST("rest/users/create-event")
     Call<Void> newEvent(@Body NewEventRequest data);

@@ -25,9 +25,9 @@ public class GetUserRepository {
         return instance;
     }
 
-    public Result<GetUserResponse> getUser(String username) {
-
-        Result<GetUserResponse> result = dataSource.getUser(username);
-        return result;
-    }
+//    public Result<GetUserResponse> getUser(String username) {
+//
+//        Result<GetUserResponse> result = dataSource.getUser(username);
+//        return result;
+//    }
 }

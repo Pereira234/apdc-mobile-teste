@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
+    private static final String TOKEN_ID_KEY = "tokenid";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     //save preferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(USERNAME_KEY, usernameEditText.getText().toString());
+                    editor.putString(TOKEN_ID_KEY, loginResult.getTokenId());
                     editor.apply();
 
                     Intent intent = new Intent(mActivity, MainActivity.class);

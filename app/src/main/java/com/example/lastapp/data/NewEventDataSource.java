@@ -19,7 +19,7 @@ public class NewEventDataSource {
 
     public NewEventDataSource() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://voltaic-cocoa-307910.appspot.com/")
+                .baseUrl("https://goodway-320318.appspot.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

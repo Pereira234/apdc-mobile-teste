@@ -139,9 +139,24 @@ public class ProfileFragment extends Fragment {
                     GetUserResponse user = response.body();
                     profileName.setText(user.getName());
                     profileDescription.setText("Descrição de teste");
-                    email.setText(user.getEmail());
-                    phone.setText(user.getCellphone());
-                    local.setText(user.getPrimaryAddress());
+                    if(!user.getEmail().trim().equals("")) {
+                        email.setText(user.getEmail());
+                    }
+                    else {
+                        email.setText("Not Defined");
+                    }
+                    if(!user.getCellphone().trim().equals("")) {
+                        phone.setText(user.getCellphone());
+                    }
+                    else {
+                        phone.setText("Not Defined");
+                    }
+                    if(!user.getPrimaryAddress().trim().equals("")) {
+                        local.setText(user.getCellphone());
+                    }
+                    else {
+                        local.setText("Not Defined");
+                    }
                 }
             }
 

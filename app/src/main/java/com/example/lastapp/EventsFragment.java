@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -88,50 +87,150 @@ public class EventsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_events, container, false);
 
 
-        FragmentActivity activity = this.getActivity();
 
-        EventViewModel eventViewModel = new ViewModelProvider(this,
-                new EventViewModelFactory(((GWApp) activity.getApplication()).getExecutorService()))
-                .get(EventViewModel.class);
-
-        final EditText eventNameEditText = v.findViewById(R.id.eventName);
-        final EditText eventDescriptionEditText = v.findViewById(R.id.eventDescription);
-        final EditText eventDurationEditText = v.findViewById(R.id.eventDuration);
-        final EditText eventDateEditText = v.findViewById(R.id.eventDate);
-        final EditText locationLatEditText = v.findViewById(R.id.locationLat);
-        final EditText locationLonEditText = v.findViewById(R.id.locationLon);
-
-        final Button createEventButton = v.findViewById(R.id.createEvent);
+        
 
 
 
-        eventViewModel.getEventFormState().observe(this.getActivity(), new Observer<EventFormState>() { //need to update! (updated)
-            @Override
-            public void onChanged(@Nullable EventFormState eventFormState) {
-                if (eventFormState == null) {
-                    return;
-                }
-                createEventButton.setEnabled(eventFormState.isDataValid());
-                if (eventFormState.getNameError() != null) {
-                    eventNameEditText.setError(getString(eventFormState.getNameError()));
-                }
-                if (eventFormState.getDescriptionError() != null) {
-                    eventDescriptionEditText.setError(getString(eventFormState.getDescriptionError()));
-                }
-                if (eventFormState.getDurationError() != null) {
-                    eventDurationEditText.setError(getString(eventFormState.getDurationError()));
-                }
-                if (eventFormState.getDateError() != null) {
-                    eventDateEditText.setError(getString(eventFormState.getDateError()));
-                }
-                if(eventFormState.getLatitudeError() != null){
-                    locationLatEditText.setError(getString(eventFormState.getLatitudeError()));
-                }
-                if(eventFormState.getLongitudeError() != null){
-                    locationLonEditText.setError(getString(eventFormState.getLongitudeError()));
-                }
-            }
-        });
+
+
+
+//        super.onCreate(savedInstanceState);
+//        this.getActivity().setContentView(R.layout.fragment_events); //pode estar mal
+//
+//
+//        EventViewModel eventViewModel = new ViewModelProvider(this,
+//                new EventViewModelFactory(((GWApp) this.getActivity().getApplication()).getExecutorService()))
+//                .get(EventViewModel.class);
+//
+//        final EditText eventNameEditText = v.findViewById(R.id.eventName);
+//        final EditText eventDescriptionEditText = v.findViewById(R.id.eventDescription);
+//        final EditText eventDurationEditText = v.findViewById(R.id.eventDuration);
+//        final EditText eventDateEditText = v.findViewById(R.id.eventDate);
+//        final EditText locationLatEditText = v.findViewById(R.id.locationLat);
+//        final EditText locationLonEditText = v.findViewById(R.id.locationLon);
+//
+//        final Button createEventButton = v.findViewById(R.id.createEvent);
+//
+//
+//
+//        eventViewModel.getEventFormState().observe(this.getActivity(), new Observer<EventFormState>() { //need to update! (updated)
+//            @Override
+//            public void onChanged(@Nullable EventFormState eventFormState) {
+//                if (eventFormState == null) {
+//                    return;
+//                }
+//                createEventButton.setEnabled(eventFormState.isDataValid());
+//                if (eventFormState.getNameError() != null) {
+//                    eventNameEditText.setError(getString(eventFormState.getNameError()));
+//                }
+//                if (eventFormState.getDescriptionError() != null) {
+//                    eventDescriptionEditText.setError(getString(eventFormState.getDescriptionError()));
+//                }
+//                if (eventFormState.getDurationError() != null) {
+//                    eventDurationEditText.setError(getString(eventFormState.getDurationError()));
+//                }
+//                if (eventFormState.getDateError() != null) {
+//                    eventDateEditText.setError(getString(eventFormState.getDateError()));
+//                }
+//                if(eventFormState.getLatitudeError() != null){
+//                    locationLatEditText.setError(getString(eventFormState.getLatitudeError()));
+//                }
+//                if(eventFormState.getLongitudeError() != null){
+//                    locationLonEditText.setError(getString(eventFormState.getLongitudeError()));
+//                }
+//            }
+//        });
+//
+//
+//
+//        eventViewModel.getEventResult().observe(this.getActivity(), new Observer<EventResult>() {  //need to update!
+//            @Override
+//            public void onChanged(@Nullable EventResult eventResult) {
+//                if (eventResult == null) {
+//                    return;
+//                }
+//
+//                if (eventResult.getError() != null) {
+//                    showRegisterFailed(eventResult.getError(), v);
+//                }
+//                if (eventResult.getSuccess() != null) {
+//                    showRegisterSuccess(v);
+//                    //setResult(Activity.RESULT_OK);
+//
+//                }
+//
+//            }
+//        });
+//
+//
+//
+//
+//
+//        TextWatcher afterTextChangedListener = new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // ignore
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                // ignore
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                eventViewModel.eventDataChanged(eventNameEditText.getText().toString(),
+//                        eventDateEditText.getText().toString(),
+//                        eventDurationEditText.getText().toString(),
+//                        eventDateEditText.getText().toString(),
+//                        Double.parseDouble(locationLatEditText.toString()),
+//                        Double.parseDouble(locationLonEditText.toString()));
+//            }
+//        };
+//
+//
+//        eventNameEditText.addTextChangedListener(afterTextChangedListener);
+//        eventDescriptionEditText.addTextChangedListener(afterTextChangedListener);
+//        eventDurationEditText.addTextChangedListener(afterTextChangedListener);
+//        eventDateEditText.addTextChangedListener(afterTextChangedListener);
+//        locationLatEditText.addTextChangedListener(afterTextChangedListener);
+//        locationLonEditText.addTextChangedListener(afterTextChangedListener);
+//        eventNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    eventViewModel.createEvent(eventNameEditText.getText().toString(),
+//                            eventDescriptionEditText.getText().toString(),
+//                            eventDurationEditText.getText().toString(),
+//                            eventDateEditText.getText().toString(),
+//                            Double.parseDouble(locationLatEditText.toString()),
+//                            Double.parseDouble(locationLonEditText.toString())
+//                    );
+//                }
+//                return false;
+//            }
+//        });
+//
+//        createEventButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                eventViewModel.createEvent(eventNameEditText.getText().toString(),
+//                        eventDescriptionEditText.getText().toString(),
+//                        eventDurationEditText.getText().toString(),
+//                        eventDateEditText.getText().toString(),
+//                        Double.parseDouble(locationLatEditText.toString()),
+//                        Double.parseDouble(locationLonEditText.toString())
+//
+//                );
+//            }
+//        });
+//
+//
+//
+//
 
 
 
@@ -139,5 +238,15 @@ public class EventsFragment extends Fragment {
         return v;
     }
 
+    private void showRegisterFailed(@StringRes Integer errorString, View v) {
+        Context context = v.getContext().getApplicationContext();
+        Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
+    }
 
+    private void showRegisterSuccess(View v) {
+        Context context = v.getContext().getApplicationContext();
+        String message = getString(R.string.register_successful);
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+    }
 }

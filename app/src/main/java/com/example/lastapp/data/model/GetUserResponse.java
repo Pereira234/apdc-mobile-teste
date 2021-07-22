@@ -4,6 +4,7 @@ package com.example.lastapp.data.model;
 public class GetUserResponse {
 
     String username;
+    String description;
     String password;
     String name;
     String email;
@@ -17,9 +18,10 @@ public class GetUserResponse {
     long hoursWorked;
     String NIB;
 
-    public void UserAuthenticated(String username, String password, String email, String name, String profileType, String telephone, String cellphone,
+    public void UserAuthenticated(String username, String description ,String password, String email, String name, String profileType, String telephone, String cellphone,
                                   String primaryAddress, String secondaryAddress, String locale, String zipcode, long hoursWorked) {
         this.username = username;
+        this.description = description;
         this.password = password;
         this.email = email;
         this.name = name;
@@ -35,6 +37,11 @@ public class GetUserResponse {
 
     public String getUsername() {
         return username;
+    }
+
+
+    public String getDescription() {
+        return description;
     }
 
     public String getPassword() {

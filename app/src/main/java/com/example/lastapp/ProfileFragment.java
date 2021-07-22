@@ -138,7 +138,7 @@ public class ProfileFragment extends Fragment {
                 else {
                     GetUserResponse user = response.body();
                     profileName.setText(user.getName());
-                    profileDescription.setText("Descrição de teste");
+                    profileDescription.setText(user.getDescription());
                     if(!user.getEmail().trim().equals("")) {
                         email.setText(user.getEmail());
                     }

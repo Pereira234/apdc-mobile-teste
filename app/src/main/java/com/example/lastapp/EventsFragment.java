@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -87,20 +88,10 @@ public class EventsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_events, container, false);
 
 
-
-        
-
-
-
-
-
-
-        super.onCreate(savedInstanceState);
-        this.getActivity().setContentView(R.layout.fragment_events); //pode estar mal
-
+        FragmentActivity activity = this.getActivity();
 
         EventViewModel eventViewModel = new ViewModelProvider(this,
-                new EventViewModelFactory(((GWApp) this.getActivity().getApplication()).getExecutorService()))
+                new EventViewModelFactory(((GWApp) activity.getApplication()).getExecutorService()))
                 .get(EventViewModel.class);
 
         final EditText eventNameEditText = v.findViewById(R.id.eventName);
@@ -144,109 +135,9 @@ public class EventsFragment extends Fragment {
 
 
 
-        eventViewModel.getEventResult().observe(this.getActivity(), new Observer<EventResult>() {  //need to update!
-            @Override
-            public void onChanged(@Nullable EventResult eventResult) {
-                if (eventResult == null) {
-                    return;
-                }
-
-                if (eventResult.getError() != null) {
-                    showRegisterFailed(eventResult.getError(), v);
-                }
-                if (eventResult.getSuccess() != null) {
-                    showRegisterSuccess(v);
-                    //setResult(Activity.RESULT_OK);
-
-                }
-
-            }
-        });
-
-
-
-
-
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                eventViewModel.eventDataChanged(eventNameEditText.getText().toString(),
-                        eventDateEditText.getText().toString(),
-                        eventDurationEditText.getText().toString(),
-                        eventDateEditText.getText().toString(),
-                        Double.parseDouble(locationLatEditText.toString()),
-                        Double.parseDouble(locationLonEditText.toString()));
-            }
-        };
-
-
-        eventNameEditText.addTextChangedListener(afterTextChangedListener);
-        eventDescriptionEditText.addTextChangedListener(afterTextChangedListener);
-        eventDurationEditText.addTextChangedListener(afterTextChangedListener);
-        eventDateEditText.addTextChangedListener(afterTextChangedListener);
-        locationLatEditText.addTextChangedListener(afterTextChangedListener);
-        locationLonEditText.addTextChangedListener(afterTextChangedListener);
-        eventNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    eventViewModel.createEvent(eventNameEditText.getText().toString(),
-                            eventDescriptionEditText.getText().toString(),
-                            eventDurationEditText.getText().toString(),
-                            eventDateEditText.getText().toString(),
-                            Double.parseDouble(locationLatEditText.toString()),
-                            Double.parseDouble(locationLonEditText.toString())
-                    );
-                }
-                return false;
-            }
-        });
-
-        createEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                eventViewModel.createEvent(eventNameEditText.getText().toString(),
-                        eventDescriptionEditText.getText().toString(),
-                        eventDurationEditText.getText().toString(),
-                        eventDateEditText.getText().toString(),
-                        Double.parseDouble(locationLatEditText.toString()),
-                        Double.parseDouble(locationLonEditText.toString())
-
-                );
-            }
-        });
-
-
-
-
-
-
-
 
         return v;
     }
 
-    private void showRegisterFailed(@StringRes Integer errorString, View v) {
-        Context context = v.getContext().getApplicationContext();
-        Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
-    }
 
-    private void showRegisterSuccess(View v) {
-        Context context = v.getContext().getApplicationContext();
-        String message = getString(R.string.register_successful);
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-
-    }
 }

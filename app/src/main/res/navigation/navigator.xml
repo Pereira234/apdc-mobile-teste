@@ -13,7 +13,7 @@
         android:id="@+id/secondFragment"
         android:name="com.example.lastapp.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.lastapp.MapsFragment"
@@ -22,8 +22,7 @@
     <fragment
         android:id="@+id/forthFragment"
         android:name="com.example.lastapp.EventsFragment"
-        android:label="fragment_forth"
-        tools:layout="@layout/fragment_events" />
+        android:label="fragment_forth" />
     <fragment
         android:id="@+id/fifthFragment"
         android:name="com.example.lastapp.ProfileFragment"

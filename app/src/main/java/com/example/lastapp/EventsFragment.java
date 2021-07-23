@@ -30,6 +30,7 @@ import com.example.lastapp.ui.event.EventResult;
 import com.example.lastapp.ui.event.EventViewModel;
 import com.example.lastapp.ui.event.EventViewModelFactory;
 import com.example.lastapp.ui.login.LoginActivity;
+import com.example.lastapp.ui.register.RegisterActivity;
 import com.example.lastapp.ui.register.RegisterViewModel;
 import com.example.lastapp.ui.register.RegisterViewModelFactory;
 
@@ -85,6 +86,16 @@ public class EventsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_events, container, false);
+
+        Button btn = v.findViewById(R.id.createEventPage);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), EventsActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

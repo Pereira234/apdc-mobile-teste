@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Faça o Seu Registo Aqui"
+        android:text="Sign up now!"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Nome"
+        android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -62,13 +62,13 @@
 
     <EditText
         android:id="@+id/passwordRegister"
-        android:hint="Palavra Passe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,13 +76,13 @@
 
     <EditText
         android:id="@+id/passwordConfirmRegister"
-        android:hint="Confirmar Palavra Passe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,12 +92,15 @@
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:text="Registar"
+        android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordConfirmRegister"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.375"
+        android:background="@drawable/custom_button"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,6 +1,7 @@
 package com.example.lastapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,6 +113,16 @@ public class ProfileFragment extends Fragment {
         final TextView phone = v.findViewById(R.id.phone_textview);
         final TextView local = v.findViewById(R.id.local_textview);
 
+        Button btn = v.findViewById(R.id.editProfile);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         String username = sharedPreferences.getString(USERNAME_KEY, null);
@@ -152,7 +164,7 @@ public class ProfileFragment extends Fragment {
                         phone.setText("Not Defined");
                     }
                     if(!user.getPrimaryAddress().trim().equals("")) {
-                        local.setText(user.getCellphone());
+                        local.setText(user.getPrimaryAddress());
                     }
                     else {
                         local.setText("Not Defined");

@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Header;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -26,9 +27,11 @@ public class NewEventDataSource {
         this.service = retrofit.create(UserService.class);
     }
 
-    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude) {
+    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude,
+                                    String startingTime, String category, String tokenId) {
 
-        Call<Void> newEventCall = service.newEvent(new NewEventRequest(name, description, duration, date, latitude, longitude));
+        Call<Void> newEventCall = service.newEvent(new NewEventRequest(name, description, duration, date, latitude, longitude,
+                startingTime, category), tokenId);
         try {
             Response<Void> response = newEventCall.execute();
             if (response.isSuccessful()){

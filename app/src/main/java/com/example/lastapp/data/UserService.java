@@ -24,5 +24,5 @@ public interface UserService {
     Call<GetUserResponse> getUser(@Path("user_id") String user_id, @Header("tokenId") String tokenId);
 
     @POST("rest/users/create-event")
-    Call<Void> newEvent(@Body NewEventRequest data);
+    Call<Void> newEvent(@Body NewEventRequest data, @Header("tokenId") String tokenId);
 }

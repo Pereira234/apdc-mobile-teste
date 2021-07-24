@@ -1,27 +1,29 @@
 package com.example.lastapp.data.model;
 
-import androidx.annotation.Nullable;
-
 public class NewEventRequest {
-    String name;
+    String title;
     String description;
     String duration;
     String date;
-    Double latitude;
-    Double longitude;
+    Double lat;
+    Double lon;
+    String startingTime;
+    String category;
 
 
-    public NewEventRequest(String name, String description, String duration, String date, Double latitude, Double longitude) {
-        this.name = name;
+    public NewEventRequest(String name, String description, String duration, String date, Double latitude, Double longitude, String startingTime, String category) {
+        this.title = name;
         this.description = description;
         this.duration = duration;
         this.date = date;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.lat = latitude;
+        this.lon = longitude;
+        this.startingTime = startingTime;
+        this.category = category;
     }
 
-    public String getname() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getDescription() {
@@ -36,11 +38,19 @@ public class NewEventRequest {
         return date;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Double getLat() {
+        return lat;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public Double getLon() {
+        return lon;
+    }
+
+    public String getStartingTime() {
+        return startingTime;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

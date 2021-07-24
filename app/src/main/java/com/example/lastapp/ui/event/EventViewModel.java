@@ -36,11 +36,13 @@ public class EventViewModel extends ViewModel {
         return eventResult;
     }
 
-    public void createEvent(String name, String description, String duration, String date, Double latitude, Double longitude) {
+    public void createEvent(String name, String description, String duration, String date, Double latitude, Double longitude,
+                            String startingTime, String category, String tokenId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Result<Void> result = newEventRepository.createEvent(name, description, duration, date, latitude, longitude);
+                Result<Void> result = newEventRepository.createEvent(name, description, duration, date, latitude, longitude,
+                        startingTime, category, tokenId);
                 if (result instanceof Result.Success) {
                     eventResult.postValue(new EventResult(true));
                 } else {

@@ -17,6 +17,9 @@ public class EventResult {
         this.success = success;
     }
 
+    public EventResult(String toString) {
+    }
+
     @Nullable
     public Boolean getSuccess() {
         return success;

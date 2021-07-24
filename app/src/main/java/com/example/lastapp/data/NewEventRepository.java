@@ -3,6 +3,8 @@ package com.example.lastapp.data;
 import com.example.lastapp.data.model.RegisterRequest;
 import com.example.lastapp.data.model.RegisterResponse;
 
+import retrofit2.http.Header;
+
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
@@ -29,9 +31,10 @@ public class NewEventRepository {
     }
 
 
-    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude) {
+    public Result<Void> createEvent(String name, String description, String duration, String date, Double latitude, Double longitude,
+                                    String startingTime, String category, String tokenId) {
         // handle register
-        Result<Void> result = dataSource.createEvent(name, description, duration, date, latitude, longitude);
+        Result<Void> result = dataSource.createEvent(name, description, duration, date, latitude, longitude, startingTime, category, tokenId);
         return result;
     }
 }

@@ -7,6 +7,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +32,10 @@ public class EventsActivity extends AppCompatActivity {
     private EventViewModel eventViewModel;
     private EventsActivity mActivity;
 
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF = "mypref";
+    private static final String TOKEN_ID_KEY = "tokenid";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +55,8 @@ public class EventsActivity extends AppCompatActivity {
 
         final Button createEventButton = findViewById(R.id.createEvent);
 
-
+        sharedPreferences = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, "");
 
         eventViewModel.getEventFormState().observe(this, new Observer<EventFormState>() {
             @Override
@@ -148,38 +155,6 @@ public class EventsActivity extends AppCompatActivity {
         eventDateEditText.addTextChangedListener(afterTextChangedListener);
         locationLatEditText.addTextChangedListener(afterTextChangedListener);
         locationLonEditText.addTextChangedListener(afterTextChangedListener);
-        eventNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                    Double lat;
-                    Double lon;
-
-                    if(locationLatEditText.getText().toString().isEmpty()){
-                        lat = null;
-                    }else {
-                        lat = Double.parseDouble(locationLatEditText.getText().toString());
-                    }
-
-                    if(locationLonEditText.getText().toString().isEmpty()){
-                        lon = null;
-                    }else{
-                        lon = Double.parseDouble(locationLonEditText.getText().toString());
-                    }
-                    eventViewModel.createEvent(eventNameEditText.getText().toString(),
-                            eventDescriptionEditText.getText().toString(),
-                            eventDurationEditText.getText().toString(),
-                            eventDateEditText.getText().toString(),
-
-                            lat,
-                            lon
-                    );
-                }
-                return false;
-            }
-        });
 
         createEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +180,10 @@ public class EventsActivity extends AppCompatActivity {
                         eventDurationEditText.getText().toString(),
                         eventDateEditText.getText().toString(),
                         lat,
-                        lon
+                        lon,
+                        "tomorrow",
+                        "animals",
+                        tokenId
 
                 );
             }

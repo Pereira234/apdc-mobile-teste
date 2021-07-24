@@ -45,6 +45,9 @@ public class ProfileFragment extends Fragment {
     private static final String USERNAME_KEY = "username";
     private static final String TOKEN_ID_KEY = "tokenid";
 
+    private View frag_view;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -94,7 +97,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        frag_view = v;
         imgView = v.findViewById(R.id.profilePicView);
         Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
 
@@ -178,11 +181,81 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (allowRefresh)
-        {
-            allowRefresh = false;
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
-        }
+
+        imgView = frag_view.findViewById(R.id.profilePicView);
+        Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
+
+
+        final TextView profileName = frag_view.findViewById(R.id.profileName);
+        final TextView profileDescription = frag_view.findViewById(R.id.profileDescription);
+        final TextView email = frag_view.findViewById(R.id.email_textview);
+        final TextView phone = frag_view.findViewById(R.id.phone_textview);
+        final TextView local = frag_view.findViewById(R.id.local_textview);
+
+        Button btn = frag_view.findViewById(R.id.editProfile);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(USERNAME_KEY, null);
+        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, null);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://goodway-320318.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UserService service = retrofit.create(UserService.class);
+
+        Call<GetUserResponse> getUserResponseCall = service.getUser(username, tokenId);
+
+        getUserResponseCall.enqueue(new Callback<GetUserResponse>() {
+            @Override
+            public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
+                if (!response.isSuccessful()) {
+                    profileName.setText("Erro servidor" + response.code());
+                    profileDescription.setText("");
+                    email.setText("");
+                    phone.setText("");
+                    local.setText("");
+                }
+                else {
+                    GetUserResponse user = response.body();
+                    profileName.setText(user.getName());
+                    profileDescription.setText(user.getDescription());
+                    if(!user.getEmail().trim().equals("")) {
+                        email.setText(user.getEmail());
+                    }
+                    else {
+                        email.setText("Not Defined");
+                    }
+                    if(!user.getCellphone().trim().equals("")) {
+                        phone.setText(user.getCellphone());
+                    }
+                    else {
+                        phone.setText("Not Defined");
+                    }
+                    if(!user.getPrimaryAddress().trim().equals("")) {
+                        local.setText(user.getPrimaryAddress());
+                    }
+                    else {
+                        local.setText("Not Defined");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetUserResponse> call, Throwable t) {
+                profileName.setText(t.getMessage());
+            }
+        });
 
     }
 

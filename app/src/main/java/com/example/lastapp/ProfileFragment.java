@@ -1,33 +1,25 @@
 package com.example.lastapp;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.lastapp.data.GetUserDataSource;
-import com.example.lastapp.data.GetUserRepository;
-import com.example.lastapp.data.Result;
 import com.example.lastapp.data.UserService;
 import com.example.lastapp.data.model.GetUserResponse;
 import com.example.lastapp.ui.getUser.GetUserViewModel;
-import com.example.lastapp.ui.getUser.GetUserViewModelFactory;
-import com.example.lastapp.ui.login.LoginViewModel;
-import com.example.lastapp.ui.login.LoginViewModelFactory;
-
-import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.example.lastapp.ui.updateUser.EditProfileActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,10 +38,15 @@ public class ProfileFragment extends Fragment {
 //    private GetUserDataSource getUserDataSource = new GetUserDataSource();
     private GetUserViewModel userViewModel;
 
+    boolean allowRefresh = true;
+
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
     private static final String TOKEN_ID_KEY = "tokenid";
+
+    private View frag_view;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -100,7 +97,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        frag_view = v;
         imgView = v.findViewById(R.id.profilePicView);
         Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
 
@@ -110,6 +107,16 @@ public class ProfileFragment extends Fragment {
         final TextView email = v.findViewById(R.id.email_textview);
         final TextView phone = v.findViewById(R.id.phone_textview);
         final TextView local = v.findViewById(R.id.local_textview);
+
+        Button btn = v.findViewById(R.id.editProfile);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
@@ -152,7 +159,7 @@ public class ProfileFragment extends Fragment {
                         phone.setText("Not Defined");
                     }
                     if(!user.getPrimaryAddress().trim().equals("")) {
-                        local.setText(user.getCellphone());
+                        local.setText(user.getPrimaryAddress());
                     }
                     else {
                         local.setText("Not Defined");
@@ -170,4 +177,86 @@ public class ProfileFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        imgView = frag_view.findViewById(R.id.profilePicView);
+        Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
+
+
+        final TextView profileName = frag_view.findViewById(R.id.profileName);
+        final TextView profileDescription = frag_view.findViewById(R.id.profileDescription);
+        final TextView email = frag_view.findViewById(R.id.email_textview);
+        final TextView phone = frag_view.findViewById(R.id.phone_textview);
+        final TextView local = frag_view.findViewById(R.id.local_textview);
+
+        Button btn = frag_view.findViewById(R.id.editProfile);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(USERNAME_KEY, null);
+        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, null);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://goodway-320318.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UserService service = retrofit.create(UserService.class);
+
+        Call<GetUserResponse> getUserResponseCall = service.getUser(username, tokenId);
+
+        getUserResponseCall.enqueue(new Callback<GetUserResponse>() {
+            @Override
+            public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
+                if (!response.isSuccessful()) {
+                    profileName.setText("Erro servidor" + response.code());
+                    profileDescription.setText("");
+                    email.setText("");
+                    phone.setText("");
+                    local.setText("");
+                }
+                else {
+                    GetUserResponse user = response.body();
+                    profileName.setText(user.getName());
+                    profileDescription.setText(user.getDescription());
+                    if(!user.getEmail().trim().equals("")) {
+                        email.setText(user.getEmail());
+                    }
+                    else {
+                        email.setText("Not Defined");
+                    }
+                    if(!user.getCellphone().trim().equals("")) {
+                        phone.setText(user.getCellphone());
+                    }
+                    else {
+                        phone.setText("Not Defined");
+                    }
+                    if(!user.getPrimaryAddress().trim().equals("")) {
+                        local.setText(user.getPrimaryAddress());
+                    }
+                    else {
+                        local.setText("Not Defined");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetUserResponse> call, Throwable t) {
+                profileName.setText(t.getMessage());
+            }
+        });
+
+    }
+
 }

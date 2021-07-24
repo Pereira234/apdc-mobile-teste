@@ -5,12 +5,14 @@ import com.example.lastapp.data.model.NewEventRequest;
 import com.example.lastapp.data.model.RegisterRequest;
 import com.example.lastapp.data.model.LoginResponse;
 import com.example.lastapp.data.model.LoginRequest;
+import com.example.lastapp.data.model.UpdateUserRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UserService {
@@ -22,6 +24,9 @@ public interface UserService {
 
     @GET("rest/users/{user_id}")
     Call<GetUserResponse> getUser(@Path("user_id") String user_id, @Header("tokenId") String tokenId);
+
+    @PUT("rest/users/{user_id}")
+    Call<Void> updateUser(@Path("user_id") String user_id, @Header("tokenId") String tokenId, @Body UpdateUserRequest data);
 
     @POST("rest/users/create-event")
     Call<Void> newEvent(@Body NewEventRequest data);

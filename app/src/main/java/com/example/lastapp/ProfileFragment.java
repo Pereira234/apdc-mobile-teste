@@ -1,12 +1,12 @@
 package com.example.lastapp;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.lastapp.data.GetUserDataSource;
-import com.example.lastapp.data.GetUserRepository;
-import com.example.lastapp.data.Result;
 import com.example.lastapp.data.UserService;
 import com.example.lastapp.data.model.GetUserResponse;
 import com.example.lastapp.ui.getUser.GetUserViewModel;
-import com.example.lastapp.ui.getUser.GetUserViewModelFactory;
-import com.example.lastapp.ui.login.LoginViewModel;
-import com.example.lastapp.ui.login.LoginViewModelFactory;
-
-import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.example.lastapp.ui.updateUser.EditProfileActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +37,8 @@ public class ProfileFragment extends Fragment {
     ImageView imgView;
 //    private GetUserDataSource getUserDataSource = new GetUserDataSource();
     private GetUserViewModel userViewModel;
+
+    boolean allowRefresh = true;
 
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF = "mypref";
@@ -182,4 +174,16 @@ public class ProfileFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (allowRefresh)
+        {
+            allowRefresh = false;
+            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+        }
+
+    }
+
 }

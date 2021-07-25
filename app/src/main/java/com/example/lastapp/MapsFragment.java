@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.lastapp.data.UserService;
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.data.model.GetUserResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,7 +40,8 @@ public class MapsFragment extends Fragment {
     private static final String TOKEN_ID_KEY = "tokenid";
     FragmentActivity activity = this.getActivity();
 
-    private List<GetEventNameIDResponse> events;
+    private List<EventDataResponse> events;
+//    private List<GetEventNameIDResponse> events;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -58,20 +60,16 @@ public class MapsFragment extends Fragment {
 
 
 
-            int i = 0;
             if (events != null)
-            for (GetEventNameIDResponse event: events){
-                LatLng coords = new LatLng(38.667770746919395,-9.214596500911977+i);
-                googleMap.addMarker(new MarkerOptions().position(coords).title(event.getName()));
-                i+=10;
+//            for (GetEventNameIDResponse event: events){
+            for (EventDataResponse event: events){
+                LatLng coords = new LatLng(event.getLat(),event.getLon());
+//                googleMap.addMarker(new MarkerOptions().position(coords).title(event.getName()));
+                googleMap.addMarker(new MarkerOptions().position(coords).title(event.getTitle()));
             }
             googleMap.addMarker(new MarkerOptions().position(FCT).title("FCT UNL"));
+            googleMap.moveCamera(CameraUpdateFactory.zoomTo(10));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(FCT));
-//            googleMap.moveCamera(CameraUpdateFactory.zoomIn());
-            googleMap.moveCamera(CameraUpdateFactory.zoomBy(15));
-//            googleMap.addMarker(new MarkerOptions().position(event1).title("Lunch with the boys"));
-//            googleMap.addMarker(new MarkerOptions().position(event2).title("Park"));
-//            googleMap.addMarker(new MarkerOptions().position(event3).title("Barbas"));
         }
     };
 

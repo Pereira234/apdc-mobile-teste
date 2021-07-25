@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.lastapp.R;
 import com.example.lastapp.data.GetEventsRepository;
 import com.example.lastapp.data.Result;
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class GetEventsViewModel extends ViewModel {
 
     private final Executor executor;
 
-    private List<GetEventNameIDResponse> list;
+//    private List<GetEventNameIDResponse> list;
+    private List<EventDataResponse> list;
 
     GetEventsViewModel(GetEventsRepository getEventsRepository, Executor executor) {
         this.getEventsRepository = getEventsRepository;
@@ -30,13 +32,30 @@ public class GetEventsViewModel extends ViewModel {
         return getEventsResult;
     }
 
-    public List<GetEventNameIDResponse> getEvents(String tokenId) {
+//    public List<GetEventNameIDResponse> getEvents(String tokenId) {
+//        executor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                Result<List<GetEventNameIDResponse>> result = getEventsRepository.getEvents(tokenId);
+//                if (result instanceof Result.Success) {
+//                    list = ((Result.Success<List<GetEventNameIDResponse>>) result).getData();
+//                    getEventsResult.postValue(new GetEventsResult(list));
+//                } else {
+//                    list = null;
+//                    getEventsResult.postValue(new GetEventsResult(R.string.get_events_failed));
+//                }
+//            }
+//        });
+//        return list;
+//    }
+
+    public List<EventDataResponse> getEvents(String tokenId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                Result<List<GetEventNameIDResponse>> result = getEventsRepository.getEvents(tokenId);
+                Result<List<EventDataResponse>> result = getEventsRepository.getEvents(tokenId);
                 if (result instanceof Result.Success) {
-                    list = ((Result.Success<List<GetEventNameIDResponse>>) result).getData();
+                    list = ((Result.Success<List<EventDataResponse>>) result).getData();
                     getEventsResult.postValue(new GetEventsResult(list));
                 } else {
                     list = null;

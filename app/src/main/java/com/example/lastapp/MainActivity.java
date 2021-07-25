@@ -15,10 +15,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.lastapp.data.UserService;
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.ui.getEvents.GetEventsResult;
 import com.example.lastapp.ui.getEvents.GetEventsViewModel;
@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private GetEventsViewModel getEventsViewModel;
 
-    public static List<GetEventNameIDResponse> list;
+//    public static List<GetEventNameIDResponse> list;
+    public static List<EventDataResponse> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +155,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public List<GetEventNameIDResponse> getEventsForMap(String tokenID) {
+//    public List<GetEventNameIDResponse> getEventsForMap(String tokenID) {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://goodway-320318.appspot.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        UserService service = retrofit.create(UserService.class);
+//
+//        Call<List<GetEventNameIDResponse>> getEventsNameIDCall = service.getEventsNameID(tokenID);
+//
+//        try {
+//            Response<List<GetEventNameIDResponse>> response = getEventsNameIDCall.execute();
+//            if (response.isSuccessful()){
+//                return  response.body();
+//            }
+//            else {
+//                Toast.makeText(this, "Error getting the events", Toast.LENGTH_LONG).show();
+//            }
+//        } catch (IOException e) {
+//            Toast.makeText(this, "Failed Request", Toast.LENGTH_LONG).show();
+//        }
+//        return null;
+//    }
+
+    public List<EventDataResponse> getEventsForMap(String tokenID) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://goodway-320318.appspot.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -162,10 +187,10 @@ public class MainActivity extends AppCompatActivity {
 
         UserService service = retrofit.create(UserService.class);
 
-        Call<List<GetEventNameIDResponse>> getEventsNameIDCall = service.getEventsNameID(tokenID);
+        Call<List<EventDataResponse>> getEventsNameIDCall = service.getEventsNameID(tokenID);
 
         try {
-            Response<List<GetEventNameIDResponse>> response = getEventsNameIDCall.execute();
+            Response<List<EventDataResponse>> response = getEventsNameIDCall.execute();
             if (response.isSuccessful()){
                 return  response.body();
             }

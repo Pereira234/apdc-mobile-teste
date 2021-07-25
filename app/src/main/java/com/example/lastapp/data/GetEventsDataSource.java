@@ -1,5 +1,6 @@
 package com.example.lastapp.data;
 
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.data.model.LoggedInUser;
 import com.example.lastapp.data.model.LoginRequest;
@@ -31,11 +32,25 @@ public class GetEventsDataSource {
 
     }
 
-    public Result<List<GetEventNameIDResponse>> getEventsNameID(String tokenId) {
+//    public Result<List<GetEventNameIDResponse>> getEventsNameID(String tokenId) {
+//
+//        Call<List<GetEventNameIDResponse>> getEventsCall = service.getEventsNameID(tokenId);
+//        try {
+//           Response<List<GetEventNameIDResponse>> response = getEventsCall.execute();
+//           if (response.isSuccessful()){
+//               return new Result.Success<>(response.body());
+//           }
+//            return new Result.Error(new Exception(response.errorBody().toString()));
+//        } catch (IOException e) {
+//            return new Result.Error(new IOException("Error getting events", e));
+//        }
+//    }
 
-        Call<List<GetEventNameIDResponse>> getEventsCall = service.getEventsNameID(tokenId);
+    public Result<List<EventDataResponse>> getEventsNameID(String tokenId) {
+
+        Call<List<EventDataResponse>> getEventsCall = service.getEventsNameID(tokenId);
         try {
-           Response<List<GetEventNameIDResponse>> response = getEventsCall.execute();
+           Response<List<EventDataResponse>> response = getEventsCall.execute();
            if (response.isSuccessful()){
                return new Result.Success<>(response.body());
            }

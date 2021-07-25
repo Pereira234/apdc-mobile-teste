@@ -1,5 +1,6 @@
 package com.example.lastapp.data;
 
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.data.model.LoggedInUser;
 
@@ -34,8 +35,14 @@ public class GetEventsRepository {
 
 
 
-    public Result<List<GetEventNameIDResponse>> getEvents(String tokenId) {
-        Result<List<GetEventNameIDResponse>> result = dataSource.getEventsNameID(tokenId);
+//    public Result<List<GetEventNameIDResponse>> getEvents(String tokenId) {
+//        Result<List<GetEventNameIDResponse>> result = dataSource.getEventsNameID(tokenId);
+//
+//        return result;
+//    }
+
+    public Result<List<EventDataResponse>> getEvents(String tokenId) {
+        Result<List<EventDataResponse>> result = dataSource.getEventsNameID(tokenId);
 
         return result;
     }

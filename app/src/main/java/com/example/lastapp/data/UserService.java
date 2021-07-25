@@ -1,5 +1,6 @@
 package com.example.lastapp.data;
 
+import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.data.model.GetUserResponse;
 import com.example.lastapp.data.model.NewEventRequest;
@@ -34,6 +35,9 @@ public interface UserService {
     @POST("rest/users/create-event")
     Call<Void> newEvent(@Body NewEventRequest data, @Header("tokenId") String tokenId);
 
-    @GET("rest/users/events")
-    Call<List<GetEventNameIDResponse>> getEventsNameID(@Header("tokenId") String tokenId);
+//    @GET("rest/users/events")
+//    Call<List<GetEventNameIDResponse>> getEventsNameID(@Header("tokenId") String tokenId);
+
+    @GET("rest/users/eventlist")
+    Call<List<EventDataResponse>> getEventsNameID(@Header("tokenId") String tokenId);
 }

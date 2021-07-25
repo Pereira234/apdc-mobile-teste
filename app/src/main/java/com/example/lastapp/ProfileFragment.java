@@ -99,7 +99,7 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         frag_view = v;
         imgView = v.findViewById(R.id.profilePicView);
-        Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
+        //Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
 
 
         final TextView profileName = v.findViewById(R.id.profileName);
@@ -183,7 +183,7 @@ public class ProfileFragment extends Fragment {
         super.onResume();
 
         imgView = frag_view.findViewById(R.id.profilePicView);
-        Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
+        //Glide.with(this).load("https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg").into(imgView);
 
 
         final TextView profileName = frag_view.findViewById(R.id.profileName);

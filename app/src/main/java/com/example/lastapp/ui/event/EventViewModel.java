@@ -83,7 +83,7 @@ public class EventViewModel extends ViewModel {
         if (description == null) {
             return false;
         } else {
-            return !description.trim().isEmpty();
+            return true;
         }
     }
 

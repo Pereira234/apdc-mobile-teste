@@ -8,6 +8,32 @@
     tools:context=".SecondFragment">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ok_vector" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     <Button
         android:id="@+id/createEventPage"
         android:layout_width="wrap_content"
@@ -24,10 +50,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="320dp"
         android:text="Feeling generous?"
+        android:textColor="@color/white"
         android:textSize="32dp"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +63,8 @@
         android:layout_width="250dp"
         android:layout_height="144dp"
         android:layout_marginTop="60dp"
-        android:text="Don't lose out on the chance of doing a good action! If you have a cool idea where you can help someone let put it to practice! ETC... (WIP)"
+        android:textColor="@color/grey"
+        android:text="Don't lose out on the chance of doing a good action! If you already have an idea in mind creating an event it's easy as just clicking a button!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

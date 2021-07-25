@@ -45,9 +45,7 @@ public class EventFormState {
     public Integer getNameError() { return nameError; }
 
     @Nullable
-    public Integer getDescriptionError() {
-        return descriptionError;
-    }
+    public Integer getDescriptionError() { return descriptionError; }
 
     @Nullable
     public Integer getDurationError() { return durationError; }

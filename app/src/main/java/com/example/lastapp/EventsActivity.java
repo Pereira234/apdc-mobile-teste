@@ -52,6 +52,8 @@ public class EventsActivity extends AppCompatActivity {
         final EditText eventDateEditText = findViewById(R.id.eventDate);
         final EditText locationLatEditText = findViewById(R.id.locationLat);
         final EditText locationLonEditText = findViewById(R.id.locationLon);
+        final EditText eventCategory = findViewById(R.id.eventCategory);
+        final EditText eventStartingTime = findViewById(R.id.eventStartingTime);
 
         final Button createEventButton = findViewById(R.id.createEvent);
 
@@ -101,6 +103,7 @@ public class EventsActivity extends AppCompatActivity {
                 if (eventResult.getSuccess() != null) {
                     showEventSuccess();
                     setResult(Activity.RESULT_OK);
+                    finish();
                 }
 
             }
@@ -181,8 +184,8 @@ public class EventsActivity extends AppCompatActivity {
                         eventDateEditText.getText().toString(),
                         lat,
                         lon,
-                        "tomorrow",
-                        "animals",
+                        eventStartingTime.getText().toString(),
+                        eventCategory.getText().toString(),
                         tokenId
 
                 );

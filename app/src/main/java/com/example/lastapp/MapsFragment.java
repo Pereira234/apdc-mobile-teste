@@ -37,6 +37,7 @@ public class MapsFragment extends Fragment {
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
     private static final String TOKEN_ID_KEY = "tokenid";
+    FragmentActivity activity = this.getActivity();
 
     private List<GetEventNameIDResponse> events;
 
@@ -59,6 +60,7 @@ public class MapsFragment extends Fragment {
             LatLng event3 = new LatLng(38.64539348427262,-9.241273311698817);
 
             int i = 0;
+            if (events != null)
             for (GetEventNameIDResponse event: events){
                 LatLng coords = new LatLng(38.667770746919395+i,-9.214596500911977+i);
                 googleMap.addMarker(new MarkerOptions().position(coords).title(event.getName()));

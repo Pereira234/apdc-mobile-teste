@@ -11,12 +11,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.lastapp.data.UserService;
+import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,4 +75,29 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    public List<GetEventNameIDResponse> getEventsForMap(String tokenID) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://goodway-320318.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UserService service = retrofit.create(UserService.class);
+
+        Call<List<GetEventNameIDResponse>> getEventsNameIDCall = service.getEventsNameID(tokenID);
+
+        try {
+            Response<List<GetEventNameIDResponse>> response = getEventsNameIDCall.execute();
+            if (response.isSuccessful()){
+                return  response.body();
+            }
+            else {
+                Toast.makeText(this, "Error getting the events", Toast.LENGTH_LONG).show();
+            }
+        } catch (IOException e) {
+            Toast.makeText(this, "Failed Request", Toast.LENGTH_LONG).show();
+        }
+        return null;
+    }
+
 }

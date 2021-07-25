@@ -55,9 +55,8 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng FCT = new LatLng(38.660967, -9.204417);
-            LatLng event1 = new LatLng(38.667770746919395,-9.214596500911977);
-            LatLng event2 = new LatLng(38.6599251914614,-9.175331051475938);
-            LatLng event3 = new LatLng(38.64539348427262,-9.241273311698817);
+
+            events = MainActivity.list;
 
             int i = 0;
             if (events != null)

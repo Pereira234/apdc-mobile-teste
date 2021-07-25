@@ -1,6 +1,7 @@
 package com.example.lastapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -15,7 +16,11 @@ import android.widget.Toast;
 
 import com.example.lastapp.data.UserService;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
+import com.example.lastapp.ui.getEvents.GetEventsViewModel;
+import com.example.lastapp.ui.getEvents.GetEventsViewModelFactory;
 import com.example.lastapp.ui.login.LoginActivity;
+import com.example.lastapp.ui.login.LoginViewModel;
+import com.example.lastapp.ui.login.LoginViewModelFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -31,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
+    private static final String TOKEN_ID_KEY = "tokenid";
+
+    private GetEventsViewModel getEventsViewModel;
+
+    public static List<GetEventNameIDResponse> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+
+        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, "");
+
+        getEventsViewModel = new ViewModelProvider(this, new GetEventsViewModelFactory(((GWApp) getApplication()).getExecutorService()))
+                .get(GetEventsViewModel.class);
+
+
+        list = getEventsViewModel.getEvents(tokenId);
+
 
     }
 

@@ -56,17 +56,19 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             LatLng FCT = new LatLng(38.660967, -9.204417);
 
-            events = MainActivity.list;
+
 
             int i = 0;
             if (events != null)
             for (GetEventNameIDResponse event: events){
-                LatLng coords = new LatLng(38.667770746919395+i,-9.214596500911977+i);
+                LatLng coords = new LatLng(38.667770746919395,-9.214596500911977+i);
                 googleMap.addMarker(new MarkerOptions().position(coords).title(event.getName()));
                 i+=10;
             }
             googleMap.addMarker(new MarkerOptions().position(FCT).title("FCT UNL"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(FCT));
+//            googleMap.moveCamera(CameraUpdateFactory.zoomIn());
+            googleMap.moveCamera(CameraUpdateFactory.zoomBy(15));
 //            googleMap.addMarker(new MarkerOptions().position(event1).title("Lunch with the boys"));
 //            googleMap.addMarker(new MarkerOptions().position(event2).title("Park"));
 //            googleMap.addMarker(new MarkerOptions().position(event3).title("Barbas"));
@@ -79,37 +81,8 @@ public class MapsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_maps, container, false);
+        events = MainActivity.list;
 
-        FragmentActivity activity = this.getActivity();
-        sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-
-        String tokenId = sharedPreferences.getString(TOKEN_ID_KEY, null);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://goodway-320318.appspot.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        UserService service = retrofit.create(UserService.class);
-
-        Call<List<GetEventNameIDResponse>> getEventsNameIDCall = service.getEventsNameID(tokenId);
-
-        getEventsNameIDCall.enqueue(new Callback<List<GetEventNameIDResponse>>() {
-            @Override
-            public void onResponse(Call<List<GetEventNameIDResponse>> call, Response<List<GetEventNameIDResponse>> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(activity, "Error getting the events", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    events = response.body();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<GetEventNameIDResponse>> call, Throwable t) {
-                Toast.makeText(activity, "Failed Request", Toast.LENGTH_LONG).show();
-            }
-        });
 
         return v;
     }

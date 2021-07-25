@@ -20,6 +20,7 @@
     <string name="invalid_longitude">Not a valid longitude</string>
 
     <string name="login_failed">"Login failed"</string>
+    <string name="get_events_failed">"Getting events failed"</string>
 
     <string name="new_account">Click here to register</string>
 

@@ -53,7 +53,7 @@ public class EventViewModel extends ViewModel {
     }
 
 
-    public void eventDataChanged(String name, String description, String duration, String date, Double latitude, Double longitude) {
+    public void eventDataChanged(String name, String description, String duration, String date, String latitude, String longitude) {
         if (!isNameValid(name)) {
             eventFormState.setValue(new EventFormState(R.string.invalid_username, null, null, null, null, null));
         } else if (!isDescriptionValid(description)) {
@@ -103,12 +103,32 @@ public class EventViewModel extends ViewModel {
         }
     }
 
-    private boolean isLatitudeValid(Double latitude) {
-        return latitude != null;
+    private boolean isLatitudeValid(String latitude) {
+        try{
+            if(latitude.isEmpty()){
+                return  false;
+            }else {
+                Double lat = Double.parseDouble(latitude);
+            }
+            return true;
+
+        }catch (NumberFormatException e){
+            return false;
+        }
     }
 
-    private boolean isLongitudeValid(Double longitude) {
-        return longitude != null;
+    private boolean isLongitudeValid(String longitude) {
+        try{
+            if(longitude.isEmpty()){
+                return  false;
+            }else {
+                Double lon = Double.parseDouble(longitude);
+            }
+            return true;
+
+        }catch (NumberFormatException e){
+            return false;
+        }
     }
 
 }

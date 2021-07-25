@@ -127,27 +127,12 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                Double lat;
-                Double lon;
-
-                if(locationLatEditText.getText().toString().isEmpty()){
-                    lat = null;
-                }else {
-                    lat = Double.parseDouble(locationLatEditText.getText().toString());
-                }
-
-                if(locationLonEditText.getText().toString().isEmpty()){
-                    lon = null;
-                }else{
-                    lon = Double.parseDouble(locationLonEditText.getText().toString());
-                }
-
                 eventViewModel.eventDataChanged(eventNameEditText.getText().toString(),
                         eventDateEditText.getText().toString(),
                         eventDurationEditText.getText().toString(),
                         eventDateEditText.getText().toString(),
-                        lat,
-                        lon);
+                        locationLatEditText.getText().toString(),
+                        locationLonEditText.getText().toString());
             }
         };
 
@@ -163,20 +148,8 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Double lat;
-                Double lon;
-
-                if(locationLatEditText.getText().toString().isEmpty()){
-                    lat = null;
-                }else {
-                    lat = Double.parseDouble(locationLatEditText.getText().toString());
-                }
-
-                if(locationLonEditText.getText().toString().isEmpty()){
-                    lon = null;
-                }else{
-                    lon = Double.parseDouble(locationLonEditText.getText().toString());
-                }
+                Double lat = Double.parseDouble(locationLatEditText.getText().toString());
+                Double lon = Double.parseDouble(locationLonEditText.getText().toString());
 
                 eventViewModel.createEvent(eventNameEditText.getText().toString(),
                         eventDescriptionEditText.getText().toString(),

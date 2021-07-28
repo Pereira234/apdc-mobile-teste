@@ -2,6 +2,7 @@ package com.example.lastapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -24,6 +25,7 @@ import com.example.lastapp.ui.getEvents.GetEventsResult;
 import com.example.lastapp.ui.getEvents.GetEventsViewModel;
 import com.example.lastapp.ui.getEvents.GetEventsViewModelFactory;
 import com.example.lastapp.ui.login.LoginActivity;
+import com.example.lastapp.ui.updateUser.EditProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -41,10 +43,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String USERNAME_KEY = "username";
     private static final String TOKEN_ID_KEY = "tokenid";
 
-    private GetEventsViewModel getEventsViewModel;
+//    private GetEventsViewModel getEventsViewModel;
+    public static GetEventsViewModel getEventsViewModel;
 
 //    public static List<GetEventNameIDResponse> list;
     public static List<EventDataResponse> list;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 if (getEventsResult.getSuccess() != null) {
                     setResult(Activity.RESULT_OK);
                     list = getEventsResult.getList();
+
                 }
 
 
@@ -135,7 +141,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.settings_op:
-                //to do
+
+                Intent intent = new Intent(this, EditProfileActivity.class);
+                startActivity(intent);
+
                 return true;
             case R.id.logout_op:
 
@@ -143,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString(USERNAME_KEY, null);
                 editor.apply();
 
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
                 finish();
 
                 return true;

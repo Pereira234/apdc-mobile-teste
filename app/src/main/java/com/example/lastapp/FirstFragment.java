@@ -1,8 +1,12 @@
 package com.example.lastapp;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lastapp.data.model.EventDataResponse;
+import com.example.lastapp.ui.getEvents.GetEventsResult;
 
 import java.util.List;
 
@@ -75,12 +80,41 @@ public class FirstFragment extends Fragment {
 
         recyclerView = v.findViewById(R.id.eventRecyclerView);
 
+        FragmentActivity activity = this.getActivity();
 
-        List<EventDataResponse> list = MainActivity.list;
+        MainActivity.getEventsViewModel.getGetEventsResult().observe(activity, new Observer<GetEventsResult>() {
+            @Override
+            public void onChanged(@Nullable GetEventsResult getEventsResult) {
+                if (getEventsResult == null) {
+                    return;
+                }
 
-        ListAdapter adapter = new ListAdapter(this.getActivity(), list);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+                if (getEventsResult.getError() != null) {
+
+                }
+                if (getEventsResult.getSuccess() != null) {
+                    List<EventDataResponse> list = MainActivity.list;
+
+
+
+                    ListAdapter adapter = new ListAdapter(activity, list);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                }
+
+
+                //Complete and destroy login activity once successful
+                //finish();
+            }
+        });
+
+//        List<EventDataResponse> list = MainActivity.list;
+//
+//
+//
+//        ListAdapter adapter = new ListAdapter(this.getActivity(), list);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
 
 

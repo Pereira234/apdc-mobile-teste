@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +18,13 @@ import com.example.lastapp.data.UserService;
 import com.example.lastapp.data.model.EventDataResponse;
 import com.example.lastapp.data.model.GetEventNameIDResponse;
 import com.example.lastapp.data.model.GetUserResponse;
+import com.example.lastapp.ui.updateUser.EditProfileActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -38,7 +41,8 @@ public class MapsFragment extends Fragment {
     private static final String SHARED_PREF = "mypref";
     private static final String USERNAME_KEY = "username";
     private static final String TOKEN_ID_KEY = "tokenid";
-    FragmentActivity activity = this.getActivity();
+//    FragmentActivity activity = this.getActivity();
+FragmentActivity activity;
 
     private List<EventDataResponse> events;
 //    private List<GetEventNameIDResponse> events;
@@ -70,6 +74,14 @@ public class MapsFragment extends Fragment {
             googleMap.addMarker(new MarkerOptions().position(FCT).title("FCT UNL"));
             googleMap.moveCamera(CameraUpdateFactory.zoomTo(10));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(FCT));
+
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+//                    Toast.makeText(activity.getApplicationContext(), "ZARA", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            });
         }
     };
 
@@ -80,6 +92,8 @@ public class MapsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_maps, container, false);
         events = MainActivity.list;
+
+        activity = this.getActivity();
 
 
         return v;
